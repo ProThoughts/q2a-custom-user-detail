@@ -19,8 +19,13 @@
     $htmldefaults['contentview'] = true;
 
     foreach ($questions as $question) {
-		$values[] = qa_post_html_fields($question, $loginuserid, qa_cookie_get(),
-			$usershtml, null, qa_post_html_options($question, $htmldefaults));
+        $fields = qa_post_html_fields($question, $loginuserid, qa_cookie_get(),
+                                     $usershtml, null, qa_post_html_options($question, $htmldefaults));
+
+        if (function_exists('qme_remove_anchor')) {
+            $fields['content'] = qme_remove_anchor($fields['content']);
+        }
+        $values[] = $fields;
     }
     
     return $values;

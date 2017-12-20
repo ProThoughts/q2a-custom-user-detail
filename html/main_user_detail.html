@@ -1,22 +1,66 @@
-  <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col user">
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--4-col mdl-typography mdl-typography--text-center"><img src="^site_url?qa=image&amp;qa_blobid=^blobid&amp;qa_size=150"/>
-        ^buttons
-      </div>
-      <div class="mdl-cell mdl-cell--8-col">
-        <div class="mdl-typography--headline">^handle</div>
-        <ul>
-          <li><span class="mdl-typography--font-bold">^location_label</span>:^location</li>
-          <li><span class="mdl-typography--font-bold">^groups_label</span>:^groups</li>
-          <li><span class="mdl-typography--font-bold">^rearing_history</span>:^years</li>
-          <li><span class="mdl-typography--font-bold">^using_hive</span>:^hivetype</li>
-        </ul>
-        <p class="mdl-typography--subhead mdl-color-text--primary"><i class="fa fa-trophy"></i><span class="mdl-typography--font-bold"> ^points</span>（^ranking）</p>
-        <p>
-          ^about
-        </p>
-      </div>
+<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col user">
+
+  <?php if(qa_get_logged_in_userid() !== null && $userid !== qa_get_logged_in_userid()): ?>
+  <div class="mdl-card__menu">
+    <div id="favoriting" <?php echo $favorite[ 'favorite_id'];?>
+      <?php echo $favorite['code']; ?> >
+      <?php echo cud_html_builder::create_favorite_button($follow_message, $favorite[ 'favorite_tags'], ($favorite['favorite'] === 1)); ?>
     </div>
-    <!--END mdl-grid-->
   </div>
-  <!--END user-->
+  <?php endif; ?>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col mdl-typography mdl-typography--text-center">
+      <img src="<?php echo $site_url;?>?qa=image&amp;qa_blobid=<?php echo $blobid; ?>&amp;qa_size=150" />
+      <?php if($userid === qa_get_logged_in_userid()): ?>
+      <a class="mdl-button mdl-button__block mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="/account">
+        <?php echo qa_lang_html('cud_lang/edit_profile'); ?>
+      </a>
+      <?php elseif($userid !== qa_get_logged_in_userid() && qa_get_logged_in_level() >= QA_USER_LEVEL_ADMIN) : ?>
+      <a class="mdl-button mdl-button__block mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="<?php echo $editurl; ?>">
+        <?php echo qa_lang_html('cud_lang/edit_profile'); ?>
+      </a>
+      <?php endif; ?>
+    </div>
+    <div class="mdl-cell mdl-cell--8-col">
+      <div class="mdl-typography--headline">
+        <?php echo $handle; ?>
+      </div>
+      <ul>
+        <li><span class="mdl-typography--font-bold"><?php echo $location_label; ?></span>:
+          <?php echo $location; ?>
+        </li>
+        <li><span class="mdl-typography--font-bold"><?php echo $groups_label; ?></span>:
+          <?php echo $groups; ?>
+        </li>
+        <li><span class="mdl-typography--font-bold"><?php echo $rearing_history; ?></span>:
+          <?php echo $years; ?>
+        </li>
+        <li><span class="mdl-typography--font-bold"><?php echo $using_hive; ?></span>:
+          <?php echo $hivetype; ?>
+        </li>
+      </ul>
+      <p class="mdl-typography--subhead mdl-color-text--primary">
+        <i class="fa fa-trophy"></i>
+        <span class="mdl-typography--font-bold"><?php echo $points;?></span>
+        <?php echo $ranking; ?>
+      </p>
+      <p>
+        <?php echo $about; ?>
+      </p>
+    </div>
+
+    <?php if(qa_get_logged_in_userid() !== null && $userid !== qa_get_logged_in_userid()): ?>
+    <div class="mdl-card__actions mdl-card--border">
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="<?php echo $message_url;?>" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons mdl-color-text--primary">mail</i>
+          <?php echo $message_label; ?>
+          <span class="mdl-button__ripple-container">
+          <span class="mdl-ripple"></span>
+        </span>
+      </a>
+    </div>
+    <?php endif; ?>
+  </div>
+  <!--END mdl-grid-->
+</div>
+<!--END user-->

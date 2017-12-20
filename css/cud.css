@@ -1,3 +1,42 @@
 .mdl-tabs__tab-bar span.mdl-badge[data-badge]:after {
     color: #fff;
+    margin-right: 0;
+}
+.mdl-tabs__tab-bar span.mdl-badge {
+  margin-right: 0;
+}
+.mdl-tabs__tab-bar {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  justify-content: space-around;
+}
+.qa-template-user .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
+  bottom: 1px;
+}
+@media screen and (max-width:414px) {
+  .mdl-tabs__tab-bar {
+    justify-content: flex-start;
+  }
+}
+.mdl-tabs__tab-bar .mdl-tabs__tab {
+  overflow: visible;
+}
+
+/* フォロー フォロワー 0 のとき*/
+div.mdl-card.no-follows {
+  width: 100%;
+  margin: 8px 0;
+}
+
+/* フォロー、フォロワー一覧のヘッダ */
+.user-follows {
+  display: block;
+}
+
+@media screen and (max-width: 1024px) {
+  .user-follows {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
