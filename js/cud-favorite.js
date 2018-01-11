@@ -2,7 +2,6 @@ $(document).ready(function(){
   $(document).on('click', "#favoriting a", function(){
     var ens = $(this).attr('name').split('_');
     var code = $(this).parent().data('code');
-    console.log(code);
     
     qa_ajax_post('favorite', {entitytype:ens[1], entityid:ens[2], favorite:parseInt(ens[3]), code:code},
       function (lines) {

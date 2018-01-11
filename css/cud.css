@@ -31,6 +31,7 @@ div.mdl-card.no-follows {
 /* フォロー、フォロワー一覧のヘッダ */
 .user-follows {
   display: block;
+  position: relative;
 }
 
 @media screen and (max-width: 1024px) {

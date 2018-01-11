@@ -99,6 +99,7 @@ class cud_utils
 
     /*
      * ユーザーのバッジ数を返す
+     * ランキングバッジの数も加える
      */
     public static function get_badge_count($userid)
     {
@@ -106,6 +107,14 @@ class cud_utils
         $sql.= " FROM ^ysb_badges";
         $sql.= " WHERE userid = #";
         
-        return qa_db_read_one_value(qa_db_query_sub($sql, $userid));
+        $badge_count = qa_db_read_one_value(qa_db_query_sub($sql, $userid));
+
+        $sql2 = "SELECT count(*)";
+        $sql2.= " FROM ^ysb_badge_ranking";
+        $sql2.= " WHERE userid = #";
+
+        $ranking_badge_count = qa_db_read_one_value(qa_db_query_sub($sql2, $userid));
+
+        return $badge_count + $ranking_badge_count;
     }
 }
